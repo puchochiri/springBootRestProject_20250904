@@ -82,3 +82,10 @@ ALTER DATABASE webdb CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 select * from board order by bno desc;
+
+select * from board order by bno asc;
+
+
+select * from board where bno = 800;
+
+select * from reply order by rno desc;
