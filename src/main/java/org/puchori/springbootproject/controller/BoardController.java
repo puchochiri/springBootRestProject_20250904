@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.puchori.springbootproject.dto.BoardDTO;
+import org.puchori.springbootproject.dto.BoardListReplyCountDTO;
 import org.puchori.springbootproject.dto.PageRequestDTO;
 import org.puchori.springbootproject.dto.PageResponseDTO;
 import org.puchori.springbootproject.service.BoardService;
@@ -27,7 +28,9 @@ public class BoardController {
   @GetMapping("/list")
   public void list(PageRequestDTO pageRequestDTO, Model model){
 
-    PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+    //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+
+    PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
 
     log.info(responseDTO);
 

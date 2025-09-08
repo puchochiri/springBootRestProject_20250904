@@ -4,10 +4,11 @@ package org.puchori.springbootproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.puchori.springbootproject.dto.ReplyDTO;
+import org.puchori.springbootproject.service.ReplyService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,10 @@ import java.util.Map;
 @RequestMapping("/replies")
 @Log4j2
 @Tag(name="Replies API", description = "댓글 관련 API")
+@RequiredArgsConstructor // 의존성 주입을 위함
 public class ReplyController {
 
+  private final ReplyService replyService;
   @Operation(
       summary = "Replies Post",
       description = "POST 방식으로 댓글 등록"
@@ -38,10 +41,15 @@ public class ReplyController {
     }
 
     Map<String, Long> resultMap = new HashMap<>();
-    resultMap.put("rno",111L);
+
+    Long rno = replyService.register(replyDTO);
+
+    resultMap.put("rno",rno);
 
 
     return resultMap;
   }
+
+
 
 }

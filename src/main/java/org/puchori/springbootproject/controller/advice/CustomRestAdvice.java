@@ -2,6 +2,7 @@ package org.puchori.springbootproject.controller.advice;
 
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -36,5 +37,20 @@ public class CustomRestAdvice {
       });
     }
     return ResponseEntity.badRequest().body(errorMap);
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+  public ResponseEntity<Map<String, String>> handleFKException(Exception e){
+    log.error(e);
+
+    Map<String, String> errorMap = new HashMap<>();
+
+    errorMap.put("time", "" + System.currentTimeMillis());
+    errorMap.put("msg", "constraint fails");
+
+    return ResponseEntity.badRequest().body(errorMap);
+
+
   }
 }

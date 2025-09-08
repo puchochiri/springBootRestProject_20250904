@@ -11,7 +11,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "board")
+//@ToString(exclude = "board")
+@ToString
 public class Reply extends BaseEntity{
 
   @Id
@@ -24,5 +25,9 @@ public class Reply extends BaseEntity{
   private String replyText;
 
   private String replyer;
+
+  public void changeText(String text){
+    this.replyText = text;
+  }
 
 }

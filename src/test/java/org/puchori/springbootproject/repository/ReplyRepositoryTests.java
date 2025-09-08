@@ -1,9 +1,11 @@
 package org.puchori.springbootproject.repository;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.puchori.springbootproject.domain.Board;
 import org.puchori.springbootproject.domain.Reply;
+import org.puchori.springbootproject.dto.BoardListReplyCountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -23,7 +25,7 @@ public class ReplyRepositoryTests {
   public void testInsert() {
 
     // 실제 DB에 있는 bno
-    Long bno = 99L;
+    Long bno = 2509L;
 
     Board board = Board.builder().bno(bno).build();
 
@@ -39,6 +41,8 @@ public class ReplyRepositoryTests {
 
   }
 
+
+  @Transactional
   @Test
   public void testBoardReplies(){
     Long bno = 99L;
@@ -51,6 +55,8 @@ public class ReplyRepositoryTests {
       log.info(reply);
     });
   }
+
+
 
 
 }
