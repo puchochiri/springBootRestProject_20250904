@@ -89,3 +89,9 @@ select * from board order by bno asc;
 select * from board where bno = 800;
 
 select * from reply order by rno desc;
+
+
+-- 댓글 복사
+insert into reply(moddate,regdate, reply_text,replyer,board_bno)
+select moddate, regdate, reply_text, replyer, board_bno from reply;
+
